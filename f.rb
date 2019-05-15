@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import sys
 
-with open('A-PumpV1_8_master.txt', 'r') as f:
+# print((sys.argv[1:]))
+in_file = sys.argv[1]
+
+with open(in_file, 'r') as f:
     line_num = 0
     s = ''
     L = []
@@ -12,12 +16,15 @@ with open('A-PumpV1_8_master.txt', 'r') as f:
             M.append(line.strip('@').strip())
         line_num +=1
 
-with open('A-PumpV1_8_master.txt', 'r') as f:
+
+# 'A-PumpV1_8_master.txt'
+with open(in_file, 'r') as f:
     
     line_num = 0
     SUM = []
     i = 0
     out = []
+    out_list = []
     s =''
 
     for line in f:
@@ -33,7 +40,8 @@ with open('A-PumpV1_8_master.txt', 'r') as f:
             i += 1
             s = s.split(' ')
             out = [j for j in s if j != '']
-            print(out)
+            out_list.append(out)
+            # print(out)
             s =''
             
             SUM.append(len(out))
@@ -44,12 +52,36 @@ with open('A-PumpV1_8_master.txt', 'r') as f:
         line_num += 1
     s = s.split(' ')
     out = [j for j in s if j != '']
-    print(out)
+    out_list.append(out)
+    # print(out)
     # print(t)
     SUM.append(len(out))
 
     print(SUM)
     print(L)
-    dic = dict(zip(M,SUM))
+    # print(out_list)
+    dic = dict(zip(M, SUM))
+    dic1 = dict(zip(M, out_list))
     print(dic)
-    # t = s.split(" ")
+    print(out_list[1])
+    print(dic1)
+
+'''
+with open('code.txt', 'r') as f:
+    s = ''
+    for line in f:
+        s = s + line.replace("\n", ' ')
+
+    s = s.split(' ')
+    out = [j for j in s if j != '']
+
+    print(len(out))
+    start = 0x23B2A - 0x4400
+    print(i)
+    lenth = dic['23B2A']
+    print(lenth, '\n')
+    i = 0
+    while i < lenth:
+        print(out[i + start], end = " ")
+        i += 1
+'''
