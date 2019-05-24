@@ -1,0 +1,137 @@
+import pathlib
+
+Listing subdirectories:
+>>> p = Path('.')
+>>> [x for x in p.iterdir() if x.is_dir()]
+
+Listing Python source files in this directory tree:
+>>> list(p.glob('**/*.py'))
+[PosixPath('test_pathlib.py'), PosixPath('setup.py'),
+ PosixPath('pathlib.py'), PosixPath('docs/conf.py'),
+ PosixPath('build/lib/pathlib.py')]
+
+-----------------------------------------
+PurePath.parts
+A tuple giving access to the path’s various components:
+
+>>> p = PurePath('/usr/bin/python3')
+>>> p.parts
+('/', 'usr', 'bin', 'python3')
+
+>>> p = PureWindowsPath('c:/Program Files/PSF')
+>>> p.parts
+('c:\\', 'Program Files', 'PSF')
+
+PurePath.drive
+A string representing the drive letter or name, if any:
+
+>>> PureWindowsPath('c:/Program Files/').drive
+'c:'
+>>> PureWindowsPath('/Program Files/').drive
+''
+>>> PurePosixPath('/etc').drive
+''
+
+PurePath.parents
+An immutable sequence providing access to the logical ancestors of the path:
+>>> p = PureWindowsPath('c:/foo/bar/setup.py')
+>>> p.parents[0]
+PureWindowsPath('c:/foo/bar')
+>>> p.parents[1]
+PureWindowsPath('c:/foo')
+>>> p.parents[2]
+PureWindowsPath('c:/')
+
+PurePath.parent
+The logical parent of the path:
+
+>>> p = PurePosixPath('/a/b/c/d')
+>>> p.parent
+PurePosixPath('/a/b/c')
+
+PurePath.name
+A string representing the final path component, excluding the drive and root, if any:
+
+>>> PurePosixPath('my/library/setup.py').name
+'setup.py'
+
+PurePath.suffix
+The file extension of the final component, if any:
+
+>>> PurePosixPath('my/library/setup.py').suffix
+'.py'
+>>> PurePosixPath('my/library.tar.gz').suffix
+'.gz'
+>>> PurePosixPath('my/library').suffix
+''
+
+PurePath.suffixes
+A list of the path’s file extensions:
+
+>>> PurePosixPath('my/library.tar.gar').suffixes
+['.tar', '.gar']
+>>> PurePosixPath('my/library.tar.gz').suffixes
+['.tar', '.gz']
+>>> PurePosixPath('my/library').suffixes
+[]
+
+PurePath.stem
+The final path component, without its suffix:
+
+>>> PurePosixPath('my/library.tar.gz').stem
+'library.tar'
+>>> PurePosixPath('my/library.tar').stem
+'library'
+>>> PurePosixPath('my/library').stem
+'library'
+
+PurePath.is_absolute()
+Return whether the path is absolute or not. A path is considered absolute if it has both a root and (if the flavour allows) a drive:
+
+>>> PurePosixPath('/a/b').is_absolute()
+True
+>>> PurePosixPath('a/b').is_absolute()
+False
+
+>>> PureWindowsPath('c:/a/b').is_absolute()
+True
+>>> PureWindowsPath('/a/b').is_absolute()
+False
+>>> PureWindowsPath('c:').is_absolute()
+False
+>>> PureWindowsPath('//some/share').is_absolute()
+True
+
+PurePath.match(pattern)
+Match this path against the provided glob-style pattern. Return True if matching is successful, False otherwise.
+If pattern is relative, the path can be either relative or absolute, and matching is done from the right:
+>>> PurePath('a/b.py').match('*.py')
+True
+>>> PurePath('/a/b/c.py').match('b/*.py')
+True
+>>> PurePath('/a/b/c.py').match('a/*.py')
+False
+
+If pattern is absolute, the path must be absolute, and the whole path must match:
+>>> PurePath('/a.py').match('/*.py')
+True
+>>> PurePath('a/b.py').match('/*.py')
+False
+
+PurePath.with_name(name)
+Return a new path with the name changed. If the original path doesn’t have a name, ValueError is raised:
+>>> p = PureWindowsPath('c:/Downloads/pathlib.tar.gz')
+>>> p.with_name('setup.py')
+PureWindowsPath('c:/Downloads/setup.py')
+
+PurePath.with_suffix(suffix)
+Return a new path with the suffix changed. If the original path doesn’t have a suffix, the new suffix is appended instead. If the suffix is an empty string, the original suffix is removed:
+>>> p = PureWindowsPath('c:/Downloads/pathlib.tar.gz')
+>>> p.with_suffix('.bz2')
+PureWindowsPath('c:/Downloads/pathlib.tar.bz2')
+>>> p = PureWindowsPath('README')
+>>> p.with_suffix('.txt')
+PureWindowsPath('README.txt')
+>>> p = PureWindowsPath('README.txt')
+>>> p.with_suffix('')
+PureWindowsPath('README')
