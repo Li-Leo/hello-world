@@ -50,7 +50,7 @@ def interact():
 
 def send_repeat_cmd(cmd):
     with open(datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-                                + cmd + '.txt', 'w') as f:
+                + cmd + '.txt', 'w') as f:
         while True:
             com.write((cmd + '\n').encode('utf-8'))
             serial_in = ''
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     print("Please select mode: 1 -- interactive mode, 2 -- repeat mode.")   
     mode = input("Please input mode: ")
     if mode == '2':
-        print("Press 'Esc' to exit")
         cmd = input("Please input cmd: ")
+        print("Press 'Esc' to exit repeat mode")
         time.sleep(1)
         send_repeat_cmd(cmd)
     elif mode == '1':

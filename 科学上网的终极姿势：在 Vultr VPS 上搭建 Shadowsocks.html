@@ -1,0 +1,3652 @@
+
+<!-- saved from url=(0039)https://zoomyale.com/2016/vultr_and_ss/ -->
+<html><head lang="zh"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta name="renderer" content="webkit">
+<meta name="keywords" content="也而, Yale, zoomyale, 博客, 也而的博客">
+<meta name="description" content="一个工具癖、伪 Geek 和成长中产品汪的博客。">
+
+
+
+
+    <title>科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks</title>
+
+
+<link href="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/basic.css" type="text/css" rel="stylesheet">
+<link href="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/style.scss" type="text/css" rel="stylesheet">
+<script type="text/javascript" async="" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/analytics.js.下载"></script><script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/jquery.js.下载"></script><style type="text/css">
+:root .footer > #box[style="width:100%;height:100%;position:fixed;top:0"],
+:root .content > a > .topline,
+:root .main[style="border:#7D8C8E solid 1px;height: 23px;"]
+{ display: none !important; }</style><style type="text/css">img[src="https://www.vultr.com/media/banner_1.png"]
+{display:none !important;}</style>
+<script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/basic.js.下载"></script>
+
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo_title">
+        <div class="title animated fadeInDown"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5bb0f084f34aa.png">
+
+          <h1 title="也而的博客" class="weaklink"><a href="https://zoomyale.com/">也而的博客</a>
+
+          </h1>
+
+          <div class="navbar weaklink">
+            <div class="normal_nav">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+      <ul class="mixed_site_nav site_nav sm sm-base">
+
+  <li><a id="d0a51cdd4828f11e98f8a0242ac110003" href="https://zoomyale.com/" class=" nav__item">首页</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a51ec74828f11e98f8a0242ac110003" href="https://zoomyale.com/archive" class=" nav__item">归档</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52d076828f11e98f8a0242ac110003" href="https://zoomyale.com/tags" class=" nav__item">标签</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52ea34828f11e98f8a0242ac110003" href="https://zoomyale.com/about" class=" nav__item">关于</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52fc72828f11e98f8a0242ac110003" href="https://zoomyale.com/feed" class=" nav__item">订阅</a>
+
+  </li>
+
+
+
+
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+            </div>
+
+            <div class="hamberger"><i class="fa fa-bars"></i>
+<i class="fa fa-times"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="hidden_nav animated fadeInDown">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+      <ul class="mixed_site_nav site_nav sm sm-base">
+
+  <li><a id="d0a51cdd4828f11e98f8a0242ac110003" href="https://zoomyale.com/" class=" nav__item">首页</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a51ec74828f11e98f8a0242ac110003" href="https://zoomyale.com/archive" class=" nav__item">归档</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52d076828f11e98f8a0242ac110003" href="https://zoomyale.com/tags" class=" nav__item">标签</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52ea34828f11e98f8a0242ac110003" href="https://zoomyale.com/about" class=" nav__item">关于</a>
+
+  </li>
+
+
+
+
+
+
+  <li><a id="d0a52fc72828f11e98f8a0242ac110003" href="https://zoomyale.com/feed" class=" nav__item">订阅</a>
+
+  </li>
+
+
+
+
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+      </div>
+
+    </div>
+
+    <div class="main">
+      <div class="main-inner">
+
+
+<div class="content">
+
+
+
+
+
+
+  <div class="post_page">
+
+<div class="post">
+  <div class="post_title sm_margin">
+    <h2><a>科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks</a>
+
+
+
+    </h2>
+  </div>
+
+  <div class="post_details">
+    <div class="info"><i class="fa fa-clock-o"></i>
+<span class="date_info">2016.12.21</span>
+<i class="fa fa-eye"></i>
+<span class="context">44317 Views</span>
+<span class="mobile">44317</span>
+<i class="fa fa-bookmark-o"></i>
+<span class="tags_info weaklink"><a href="https://zoomyale.com/tags/%E6%95%99%E7%A8%8B" class="tag">教程</a>
+
+<a href="https://zoomyale.com/tags/SS" class="tag">SS</a>
+
+</span>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="post_content markdown"><p class="md_block">
+    <span class="md_line md_line_start md_line_end">作为一个离开 Google 生活就无法自理的人类，我曾经发帖、提问、翻遍各种网站，四处寻找靠谱的科学上网利器。确实也找到过一些能满足当下需求的产品，但是不久后，就被封的被封、跑路的跑路了。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">而且这些服务通常价格不低，稳定性也差强人意。这时候我想，反正都是通过海外服务器来提供建服务的，为什么不干脆自己来搭呢？既能独享带宽，又安心可控，而且选取合适的提供商的话，价格也很平易近人。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">果然，搭建完以后，网速起飞了😄。下图是完成后观看 YouTube 4K 视频的截图。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf7753c8cdc.png" alt="观看 YouTube 4K 视频" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">所以，如果你和我一样不满足那些服务，又有耐心的话，这里有一份详细而对小白友好的折腾指南。事先说明，如果你希望不花钱就能用上优质的服务──醒醒，别做梦了，免费和优质从来不可能划上等号。</span>
+</p>
+
+<h2 id="toc_0" class="h16">1 一些背景和原理</h2>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">因为整个折腾过程对没有技术背景的人来说，还是略显复杂的，所以有必要先粗浅地介绍一下所涉及的概念和原理。如果不感兴趣可以跳过第一部分，直接看操作步骤。</span>
+</p>
+
+<h3 id="toc_1" class="h16">1.1 什么是 Shadowsocks</h3>
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf7760b2aea.png" alt="shadowsocks的工作原理" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Shadowsocks(ss) 是由 <a class="md_compiled" href="https://github.com/Clowwindy">Clowwindy</a> 开发的一款软件，其作用本来是加密传输资料。当然，也正因为它加密传输资料的特性，使得 GFW 没法将由它传输的资料和其他普通资料区分开来（上图），也就不能干扰我们访问那些「不存在」的网站了。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">但是时至今日，Shadowsocks 的安全性被发现是存在缺陷的，其 IP 和端口可以被嗅探到。因而，有了基于它但增加了混淆能力的 <a class="md_compiled" href="https://github.com/shadowsocksr-backup/shadowsocks-rss">ShadowsocksR</a> 项目、<a class="md_compiled" href="https://github.com/shadowsocks/simple-obfs">Simple-obfs</a> 插件，以及 <a class="md_compiled" href="https://www.v2ray.com/">v2ray</a> 项目等。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">它们本质上，都是依托墙外服务器的网络代理软件。ssR 和官方版 ss 均已不再更新，目前还在更新的只有 <a class="md_compiled" href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks-libev</a>，可以说是最轻量的 ss 版本，也是本文推荐安装使用的版本。</span>
+</p>
+
+<h3 id="toc_2" class="h16">1.2 什么是 VPS 和 Vultr</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">VPS (Virtual private server) 译作虚拟专用伺服器。你可以把它简单地理解为一台在远端的强劲电脑。当你租用了它以后，可以给它安装操作系统、软件，并通过一些工具连接和远程操控它。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end"><a class="md_compiled" href="https://www.vultr.com/">Vultr</a> 是一家 VPS 服务器提供商，有美国、亚洲、欧洲等多地的 VPS。它家的服务器以性价比高闻名，按时间计费，最低的资费为每月 $2.5。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf7771f11b4.png" alt="Vultr VPS 定价" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">比 Vultr 价格更低的服务商也有许多，最知名的莫过于<a class="md_compiled" href="https://bandwagonhost.com/">「搬瓦工」</a>，和 V 家差不多的配置只要 $19.9 每年。不过后者过于出名，据说超售严重，实测夜间速度足以让人痛哭流涕。</span>
+</p>
+
+<h3 id="toc_3" class="h16">1.3 什么是 Linux 和 SSH</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Linux 是免费开源的操作系统，大概被世界上过半服务器所采用。有大量优秀的开源软件可以安装，上述 Shadowsocks 就是其一。你可以通过命令行来直接给 Linux 操作系统「下命令」，比如 <code>$ cd ~/Desktop</code> 就是进入你根目录下的 <code>Desktop</code> 文件夹。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf77820fd30.png" alt="进入根目录下的 Desktop 文件" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">而 SSH 是一种网络协议，作为每一台 Linux 电脑的标准配置，用于计算机之间的加密登录。当你为租用的 VPS 安装 Linux 系统后，只要借助一些工具，就可以用 SSH 在你自己的 Mac/PC 电脑上远程登录该 VPS 了。</span>
+</p>
+
+<h2 id="toc_4" class="h16">2 购买和连接 VPS</h2>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">首先，访问 <a class="md_compiled" href="https://www.vultr.com/?ref=7783702-4F">Vultr.com</a> 注册帐号，网站目前还没有被墙，访问速度不错。</span>
+</p>
+
+<h3 id="toc_5" class="h16">2.1 注册 Vultr</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Vultr 官网定期会有一些促销活动，可以留意。另外，如果使用我的 <a class="md_compiled" href="https://www.vultr.com/?ref=7783702-4F">推荐链接</a> 注册，激活后可以获赠 $50 试用金，有效期两个月。</span>
+</p>
+
+<p class="md_compiled md_paragraph_html"><a href="https://www.vultr.com/?ref=7624098" style="margin-bottom:1em;"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf779254e04.png" width="728" height="90"></a></p>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">换句话说，注册后两个月内可以免费使用 5 个最低配置的 VPS。可以趁这段时间，把不同国家的节点试个遍，不过到期后记着删除多余的服务器。</span>
+</p>
+
+<h3 id="toc_6" class="h16">2.2 部署 VPS</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">注册完成后，在左边选择“Servers”标签，点击右边的加号部署新的服务器。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf77af71275.png" alt="添加新的服务器" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">选择一个你想要的节点。推荐东京和洛杉矶，速度较快，不过这也受运营商网络、你的地理位置影响，如果有试用金可以多建几个自行对比。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf77bba3a68.jpg" alt="选择节点" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">为 VPS 选择安装系统。这里因为安装脚本限制的原因，请选择 CentOS 6+，Debian 7+，Ubuntu 12+ 的系统，具体哪个可以随自己喜欢。下面的教程以 <strong>Ubuntu 18.10</strong> 为例。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbf030a739.png" alt="选择系统" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">根据需求选择套餐。只供个人科学上网用的话，$5 绰绰有余（部分节点会有限时 2.5 刀套餐）。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-dca070184502eeb9.jpg" alt="选择套餐" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">剩下都可以使用默认值。最后一项你可以自定义服务器的名字和标签，以方便区分。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-de220cea68ef3da7.jpg" alt="其余选项" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">另外，上图第 6 步中，SSH Keys 的作用是，可以让你登录 VPS 时不用每次手动输密码。若只将其用作 Shadowsocks 服务器，仅需要在配置时登录一次，可以完全忽略它。如果要同时作他用，可参考 <a class="md_compiled" href="https://www.vultr.com/docs/how-do-i-generate-ssh-keys/">此文</a> 生成并添加 SSH Key。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">等待系统安装完成。当显示“Running”时，就表示部署已完成。之后你可以随时停用、重启或销毁它。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-7a9a8643e68c2909.jpg" alt="部署完成" title=""></span>
+</p>
+
+<h3 id="toc_7" class="h16">2.3 连接 VPS</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">如果你使用的是 PC，连接 VPS 需要借助一些工具，比如 <a class="md_compiled" href="https://www.putty.org/">Putty</a>。你可以参考这篇<a class="md_compiled" href="http://jingyan.baidu.com/article/8ebacdf0d9e86549f75cd57b.html">百度经验</a>完成安装，安装完成后步骤与下文 Mac 一致。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Mac 只要打开「终端」应用即可开始使用 SSH 连接 VPS。你的「终端」界面可能和下图略有差别，但是差不远──都有一个闪烁的光标，前面会有一个 <code>$</code> 符号。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-886f9e8d5c5aee7f.jpg" alt="终端应用界面" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">首先，在 Vultr 上你刚部署的服务器右边点“Manage”，找到服务器的 IP 地址（标黄部分）和密码。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end"> <img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-1b25da2e241ac84c.jpg" alt="服务器状态页" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">在「终端」或 Putty 等应用中，输入下面的命令并回车。注意把<code>&lt;host&gt;</code>替换成你服务器的 IP 地址。</span>
+</p>
+
+
+<pre><code>ssh root@&lt;host&gt;</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">接下来屏幕上会出现一连串提示，意为无法确认 host 主机的真实性，只知道它的公钥指纹，问你还想继续连接吗？直接输入 yes 并回车。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-feb03131904f6d2b.jpg" alt="登录服务器1" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">然后输入密码，也就是把服务器状态页中密码那块复制一下，再 <code>⌘ + v</code> 贴过来。这里不管是输入还是粘贴，屏幕上都不会显示字符，所以贴完后也是看不到字符的，回车就行。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9485-686cc59a1ec892a0.jpg" alt="登录服务器2" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">当出现上图那串 <code>[root@vultr ~]#</code> 时，说明已成功登录。</span>
+</p>
+
+<h2 id="toc_8" class="h16">3 部署 Shadowsocks</h2>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Shadowsocks 需要同时具备客户端和服务器端，所以它的安装也需要分两步。</span>
+</p>
+
+<h3 id="toc_9" class="h16">3.1 部署 Shadowsocks 服务器端</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">这里使用 <a class="md_compiled" href="https://teddysun.com/486.html">@秋水逸冰</a> 的一键安装脚本，几乎不需要多余的操作，只需根据提示做选择即可。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">首先输入以下 3 行命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条。</span>
+</p>
+
+
+<pre><code>wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+
+chmod +x shadowsocks-all.sh
+
+./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">最后一步输完，你应该会看到下图中内容──是要你选择需要安装的 Shadowsocks 版本。这里选择 4)<a class="md_compiled" href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks-libev</a>，因为正如上文所说，这是目前唯一在持续更新且最为轻量的版本。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbeceef563.png" alt="选择ss版本" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">选好输入回车后，会让你输入 Shadowsocks 的密码。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbecf197a2.png" alt="输入密码" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">然后选择一个端口，输入 1-65535 间的任意数字都行。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbecf3f4b4.png" alt="选择端口" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">之后可以选择加密方式，默认是 aes-256-gcm。如果没有特殊偏好，保持默认即可。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbed03a6a2.png" alt="加密方式" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">之后会提示你是否需要安装 <a class="md_compiled" href="https://github.com/shadowsocks/simple-obfs">simple-obfs</a>。这是 ss 的一个插件工具，可以起到混淆的作用，防止 IP 和端口被嗅探到，建议选 <code>y</code> 安装。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbed06284c.png" alt="安装obfs" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">如果上一步选择了 <code>y</code>，这里可以选择一种混淆方式。通常 <code>tls</code> 要比 <code>http</code> 的混淆效果更好，所以选 <code>tls</code>。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbed0650e4.png" alt="选混淆方式" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">之后所有的配置就完成了，按任意键开始部署 Shadowsocks-libev。这时你什么都不用做，只需要耐心地等它运行完就好。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbed00813d.png" alt="开始安装" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">结束后就会看到你所部署的 Shadowsocks 的配置信息。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbed070a01.png" alt="配置信息" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">记住红色的内容，也就是服务器 IP、服务器 ss 端口、你设的密码、混淆方式和加密方式。</span>
+</p>
+
+<h3 id="toc_10" class="h16">3.2 检查和配置 Shadowsocks</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">安装完成以后，Shadowsocks 的服务器端就已经配置完了，你可以输入以下命令检查是否已经开始运行。</span>
+</p>
+
+
+<pre><code>/etc/init.d/shadowsocks-libev status</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">如果出现类似 <code>Shadowsocks-libev is running...</code> 的字样，说明已经开始正常运行了。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">这时你已经可以在自己的任意设备上进行登录使用了。如果你要修改 ss 的配置，或者忘了当初自己设置的密码和端口，可以用以下命令来打开配置文件。</span>
+</p>
+
+
+<pre><code>nano /etc/shadowsocks-libev/config.json</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">意为用 <code>nano</code> 这个编辑器打开 <code>config.json</code> 这个配置文件。你的「终端」会刷新一下，出现下图。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbf02f0026.png" alt="修改配置" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">如果某天你的 ss 突然无法使用了，很可能就是端口被封了。这时你可以直接在这里，将端口修改为 1-65535 间任意其他数字。编辑完成后，按 <code>Ctrl + X</code> ，再输入 <code>Y</code> 并回车确认退出。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">需注意的是，如果你更新了配置文件，得重启 ss 才能生效。重启命令如下：</span>
+</p>
+
+
+<pre><code>/etc/init.d/shadowsocks-libev restart</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">另外，如需添加多端口或多用户——很遗憾，shadowsocks-libev 无法通过简单的修改配置文件来实现。不过，作者另外开发了一个  ss-manager，来管理和开启多端口，感兴趣的话可以参考 <a class="md_compiled" href="https://teddysun.com/532.html">这篇教程</a>。</span>
+</p>
+
+<h3 id="toc_11" class="h16">3.3 安装 Shadowsocks 客户端</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">相比服务器端的安装，客户端的安装就简单了许多。首先，在 <a class="md_compiled" href="https://shadowsocks.org/en/download/clients.html">这个页面</a> 找到并下载自己操作系统对应的客户端。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">打开客户端，在「服务器设定」里新增服务器。然后依次填入服务器 IP、服务器端口、你设的密码和加密方式。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5c8cbf03592a2.png" alt="设置客户端" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">此处如果之前有安装 simple-obfs，需在插件一栏填写 <code>obfs-local</code>，插件选项填写 <code>obfs=tls</code> 或 <code>obfs=http</code>（视乎你选择的混淆方式）。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">然后启用代理，就可以实现科学上网了。</span>
+</p>
+
+<h2 id="toc_12" class="h16">4 开启 BBR</h2>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">完成上述步骤后，使用过程中可能会发现连接速度有时不太令人满意。这就是加速工具们发挥功能的时候了。常用的加速工具有「锐速」、TCP BBR、kcptun，等等。原理虽各不相同，但都是通过一些技术手段，来实现连接和传输速度的提升。</span>
+</p>
+
+<h3 id="toc_13" class="h16">4.1 什么是 BBR</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end"><a class="md_compiled" href="https://zh.wikipedia.org/wiki/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6">TCP BBR</a> 是 Google 于 2016 年发布的，一种避免网络拥塞的算法。目的是要尽量跑满带宽, 并且尽可能避免排队的情况。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">实际使用下来，BBR 的速度提升效果并不比「锐速」（据说已倒闭）、kcptun（多倍发包耗流量）等差。而且 BBR 已植入 Linux 4.9+ 版本的内核中，服务器开启后就能有显著的效果提升。</span>
+</p>
+
+<h3 id="toc_14" class="h16">4.2 安装 BBR</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">和 2.3 中的步骤一样，首先需要使用 SSH 登录 VPS。</span>
+</p>
+
+
+<pre><code>ssh root@&lt;host&gt;</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">这里依然使用 @秋水逸冰的一键安装<a class="md_compiled" href="https://teddysun.com/489.html">脚本</a>，输入以下命令。</span>
+</p>
+
+
+<pre><code>wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">按任意键开始安装，安装需要一段时间，等待一会即可。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf7835d36fb.png" alt="一键安装 BBR" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">安装完成后，脚本会提示需要重启 VPS，输入 <code>y</code> 并回车后重启。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">重新使用 SSH 登录 VPS，这时 BBR 应该已经开启了。你可以使用以下两行命令验证一下。</span>
+</p>
+
+
+<pre><code>uname -r
+lsmod | grep bbr</code></pre>
+
+<!--block_code_end-->
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">如果输出的内核版本为 4.9 以上版本，且返回值有 <code>tcp_bbr</code> 模块的话，说明 bbr 已启动。</span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5baf78462f983.png" alt="检查 BBR 启动" title=""></span>
+</p>
+
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">至此，整个搭建过程就大功告成了！接下来，尽情地享受自由的网络吧😄</span>
+</p>
+
+<h2 id="toc_15" class="h16">5 一些也许对你有用的教程</h2>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">在客户端的代理设置上，还有些更强大和个性化的选择，你可以参考下文中的教程自行探索。</span>
+</p>
+
+<h3 id="toc_16" class="h16">5.1 关于浏览器</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">依然记得自己使用「红杏」的畅快体验──哪个网站不能访问了，按下图标添加到规则列表中，就可以「科学」地访问了。这种无缝的体验，靠 Shadowsocks 加另一款 Chrome 扩展 SwitchyOmega 也能实现，这里是<a class="md_compiled" href="https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList">使用教程</a>。</span>
+</p>
+
+<h3 id="toc_17" class="h16">5.2 关于桌面应用</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">部署 Shadowsocks 完成后，浏览器就能实现科学上网了，但是像 Dropbox 等部分桌面应用的流量，还不能由 Shadowsocks 来代理。要实现桌面应用的代理，需要再借助其他应用，比如 <a class="md_compiled" href="https://www.proxifier.com/">Proxifier</a>、<a class="md_compiled" href="https://nssurge.com/">Surge for Mac</a> 等。</span>
+</p>
+
+<h3 id="toc_18" class="h16">5.2 关于手机</h3>
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">安卓手机只需要下载安装 <a class="md_compiled" href="https://github.com/shadowsocks/shadowsocks-android/releases">Shadowsocks 安卓版</a>，并与桌面版一样，填入服务器 IP、端口、密码和加密方式，就可以设置全局或分应用代理。如果要实现复杂 PAC 规则（自定义哪些域名走代理、哪些不走）和代理组的话，可以试试目前还在内测中的「Android 版 Surge」——<a class="md_compiled" href="https://manual.getsurfboard.com/">Surfboard</a>。</span>
+</p>
+
+
+<p class="md_block  md_has_block_below md_has_block_below_ul">
+    <span class="md_line md_line_start md_line_end">iOS 则可以通过类 <a class="md_compiled" href="https://itunes.apple.com/us/app/surge-3-web-developer-tool/id1329879957?ls=1&amp;mt=8">Surge</a> 的 App 实现 PAC 规则下的自动翻墙。</span>
+</p>
+
+
+<ul>
+<li class="md_li"><span><a class="md_compiled" href="https://medium.com/@scomper/surge-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-a1533c10e80b#.gub28k9hh">详尽版 Surge教程</a>
+</span></li>
+<li class="md_li"><span><a class="md_compiled" href="https://medium.com/@scomper/surge-for-mac-%E7%AE%80%E6%98%8E%E6%8C%87%E5%8D%97-f6f357b8f09c">简化版 Surge教程</a>
+</span></li>
+</ul>
+
+<p class="md_block">
+    <span class="md_line md_line_start md_line_end">Surge 目前定价 328 元，另有 Mac 版（另外收费）。作为一款兼具「科学上网」功能的网络开发调试利器，它完全值这个价。觉得太贵的话，可以使用相对便宜的 <a class="md_compiled" href="https://itunes.apple.com/us/app/wingy-smart-proxy-for-http/id1148026741?mt=8">Wingy</a> 或者 <a class="md_compiled" href="https://itunes.apple.com/us/app/potatso-2/id1162704202?mt=8">Potatso</a>。</span>
+</p>
+
+<h2 id="toc_19" class="h16">参考文章</h2>
+<ul>
+<li class="md_li"><span><a class="md_compiled" href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">SSH 原理与运用（一）：远程登录</a>
+</span></li>
+<li class="md_li"><span><a class="md_compiled" href="http://mpc2008cn.github.io/2015/10/22/vps/">Vultr 的 vps 搭建 shadowsocks 科学上网</a>
+</span></li>
+<li class="md_li"><span><a class="md_compiled" href="http://vc2tea.com/whats-shadowsocks/">写给非专业人士看的 Shadowsocks 简介</a>
+</span></li>
+<li class="md_li"><span><a class="md_compiled" href="https://teddysun.com/486.html">Shadowsocks 一键安装脚本（四合一）</a>
+</span></li>
+</ul>
+
+<p class="md_block">
+    <span class="md_line md_line_dom_embed md_line_with_image md_line_start md_line_end"><img class="md_compiled " src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5bfe99ba4f47d.png" alt="sponsor_1809" title=""></span>
+</p></div>
+
+</div>
+
+
+
+<link href="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/style.css" type="text/css" rel="stylesheet">
+
+<div class="doc_comments">
+  <div class="doc_comments_wrapper">
+    <div class="comments_block_title">发表评论</div>
+
+    <div class="new_comment_form_container">
+      <form id="new_comment_form" method="post" action="https://zoomyale.com/service/comment/new">
+        <input name="path" type="hidden" value="2016/vultr_and_ss.md">
+
+        <input id="reply_to_id" name="reply" type="hidden" value="">
+        <div class="comment_trigger">
+          <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/visitor.png">
+
+          </div>
+
+          <div class="trigger_title">撰写评论</div>
+
+        </div>
+
+        <div class="new_comment"><textarea name="content" rows="2" class="textarea_box"></textarea>
+<span class="comment_error"></span>
+
+        </div>
+
+        <div class="comment_triggered">
+          <div class="input_body">
+            <ul class="ident">
+              <li>
+                <input type="text" name="author" placeholder="昵称">
+
+              </li>
+
+              <li>
+                <input type="text" name="email" placeholder="邮箱">
+
+              </li>
+
+              <li>
+                <input type="text" name="site" placeholder="网站">
+
+              </li>
+
+            </ul>
+
+
+            <input type="submit" value="提交评论" class="comment_submit_button c_button">
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <ul class="comments">
+
+
+
+<li id="6b731091388a6b8c755ac86ba9909e80" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/c0f8289115754befae74336ca352d98c">
+
+      </div>
+
+      <div class="author-name"><b>monmas</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;monmas&#39;, &#39;6b731091388a6b8c755ac86ba9909e80&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-13 12:14:42</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>您好，我的加密模式是aes-256-gcm，在ss客户端里没有这个选项，我要怎么更改呢？谢谢</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="b00881a7bb5c35263b2faa41e99cf0d4" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/c0f8289115754befae74336ca352d98c">
+
+      </div>
+
+      <div class="author-name"><b>monmas</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;monmas&#39;, &#39;b00881a7bb5c35263b2faa41e99cf0d4&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-13 12:59:19</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@monmas 我已经改好了 会了 😄</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="a3a384700f37b94e60c506d11b7c3239" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/37b7e4fd9d5d45f77f959c2c3b9d659f">
+
+      </div>
+
+      <div class="author-name"><b>jayjay</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;jayjay&#39;, &#39;a3a384700f37b94e60c506d11b7c3239&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-15 15:39:54</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>非常简洁明了，我已经按照指南一步步配置了。中途唯一的不同是我的CentOS缺少nano，我用yum install了一个。其他步骤都是一致的。感谢博主的无私分享。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="fe681ff5dea8f8d528bcf184ade5e713" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/37b7e4fd9d5d45f77f959c2c3b9d659f">
+
+      </div>
+
+      <div class="author-name"><b>jayjay</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;jayjay&#39;, &#39;fe681ff5dea8f8d528bcf184ade5e713&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-15 15:56:17</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>另外，我还没有安装锐速，听一些帖子说，锐速现在不能用了？是不是这样呢？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="04c9c7d4754535f476444ce9bc8d8636" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/37b7e4fd9d5d45f77f959c2c3b9d659f">
+
+      </div>
+
+      <div class="author-name"><b>jayjay</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;jayjay&#39;, &#39;04c9c7d4754535f476444ce9bc8d8636&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-15 16:19:57</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>我用的CentOS 6.9 另外一家的VPS 安装锐速的时候报错：“锐速暂不支持该内核，程序退出.自动安装判断比较严格，你可以到http://www.91yun.org/serverspeeder91yun手动下载安装文件尝试不同版本”，不过91yun.org的网站打不开了。如何解决？谢谢！</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="d576804c369e3e5192423a1662b51f6c" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/37b7e4fd9d5d45f77f959c2c3b9d659f">
+
+      </div>
+
+      <div class="author-name"><b>jayjay</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;jayjay&#39;, &#39;d576804c369e3e5192423a1662b51f6c&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-15 16:59:09</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>不过 我后来想想还是把锐速给卸载了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="71b405e0a918c30d6facafdf2abc196e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;71b405e0a918c30d6facafdf2abc196e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-15 19:47:17</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@jayjay 锐速官方已经不对个人用户开放了，不过还有一些非官方版本可用。另外还有一些 net speeder 之类的 TCP 加速工具能用</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="d049cde1961b1cf7b253826c1b857eba" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/37b7e4fd9d5d45f77f959c2c3b9d659f">
+
+      </div>
+
+      <div class="author-name"><b>jayjay</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;jayjay&#39;, &#39;d049cde1961b1cf7b253826c1b857eba&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-18 00:08:57</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>我本来是用的别的VPS 今天试了 vultr 但是似乎IP又不是被墙了 ssh 不上去 总是 time out</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="fd89f3437e8e32421b34670919d7023a" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/ed0a5cb66311dadae191947d3968c31e">
+
+      </div>
+
+      <div class="author-name"><b>Formblackt</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Formblackt&#39;, &#39;fd89f3437e8e32421b34670919d7023a&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-18 03:30:51</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>非常感谢楼主 我可以用了。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="fdd8012c0a2da7658c4418f919d0034a" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/ed0a5cb66311dadae191947d3968c31e">
+
+      </div>
+
+      <div class="author-name"><b>Formblackt</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Formblackt&#39;, &#39;fdd8012c0a2da7658c4418f919d0034a&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-18 03:31:07</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>赞助20~ 注意查收~</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="af44d950d2ff795997d746f26986b0bc" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;af44d950d2ff795997d746f26986b0bc&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-18 20:57:40</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Formblackt 谢谢支持 🙏</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="e0194f5b241459bea614e72ee0e2de02" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/6372353e0cad3a6618a02a5727522578">
+
+      </div>
+
+      <div class="author-name"><b>Allan</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Allan&#39;, &#39;e0194f5b241459bea614e72ee0e2de02&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-25 17:18:19</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>感谢楼主，部署成功。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="ade52f891cd05b86873792c6f6c08714" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/bc7688665b1741ddd09ac453f47393f1">
+
+      </div>
+
+      <div class="author-name"><b>kirk</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;kirk&#39;, &#39;ade52f891cd05b86873792c6f6c08714&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-27 16:14:02</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>po主你好，教程很棒啊，学习一下！另外想问的是你blog的评论系统是什么？ 谢谢。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="c4fdf6d3f94ed5c894de0c0fd387caf6" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;c4fdf6d3f94ed5c894de0c0fd387caf6&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-27 23:25:22</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@kirk https://bitcron.com</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="532876d83cc084214419a562a70fbcc7" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/fddbb1c8fb3bca2a79fc418474ca67ce">
+
+      </div>
+
+      <div class="author-name"><b>1476377353</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;1476377353&#39;, &#39;532876d83cc084214419a562a70fbcc7&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-30 11:55:36</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好，教程很nice,但发现在电脑上可以看1080p的youtube，在手机上打开youtube都很难。想请教一下，关于这个问题有解决的可能吗</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="bd73f506c24130f277285fda1ee47d7e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;bd73f506c24130f277285fda1ee47d7e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-10-30 23:15:38</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@1476377353 如果不是在电脑上使用了双边加速，应该是手机上代理设置不正确，可以开启全局代理试一下</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="a41719bff14f387f901746fb4f87abcf" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/886864bcbf1f097473595acd9fb7a284">
+
+      </div>
+
+      <div class="author-name"><b>Lanchr</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Lanchr&#39;, &#39;a41719bff14f387f901746fb4f87abcf&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-11-11 12:36:07</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>博主，根据的你的链接，链接上信用卡后，找不到赠送的金额？是不赠送了吗？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="23a3f5076692181bf5acce9da7e13e27" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/886864bcbf1f097473595acd9fb7a284">
+
+      </div>
+
+      <div class="author-name"><b>Lanchr</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Lanchr&#39;, &#39;23a3f5076692181bf5acce9da7e13e27&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-11-11 12:38:29</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>从mudium看到的进去注册的，没想到来着一看过期了，呜呜呜~~~</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="724813b0c22ca169e2ae242562908d8e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;724813b0c22ca169e2ae242562908d8e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-11-11 19:50:27</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Lanchr 嗯活动过期了，不过新增了一档 2.5 刀的 VPS，翻墙够用了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="6a2a3c488c427a65ac6f7d0671af18b6" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/24e1f2a29dc7e73cd0dd2297c85371e5">
+
+      </div>
+
+      <div class="author-name"><b>hotsuitor</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;hotsuitor&#39;, &#39;6a2a3c488c427a65ac6f7d0671af18b6&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-12-15 18:18:01</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好，请问你的Mac终端是如何设置成向右的箭头的？我也想这样设置，请教。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="cd1885de9d6fd1c2d7e478e0c2e1200d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;cd1885de9d6fd1c2d7e478e0c2e1200d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-12-15 21:06:59</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@hotsuitor 搜 ohmyzsh</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="ff96f8367d004844c1f3b0486e2e2c27" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/24e1f2a29dc7e73cd0dd2297c85371e5">
+
+      </div>
+
+      <div class="author-name"><b>hitsuitor</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;hitsuitor&#39;, &#39;ff96f8367d004844c1f3b0486e2e2c27&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-12-15 21:33:42</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Yale 感谢!已经安装成功。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="4d75a6369cd92d98cfa4942ae0af4a75" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/e95f39e8797ad6e71e40563b43be0c65">
+
+      </div>
+
+      <div class="author-name"><b>Kris</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Kris&#39;, &#39;4d75a6369cd92d98cfa4942ae0af4a75&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2017-12-21 17:26:38</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>能否请你有偿帮我远程安装？我不懂技术，弄起来很麻烦哇。邮件联系</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="09651b5a79aa1b18a869274f4ed32899" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/3e4e14420a9e84a2009cc764d5c108d1">
+
+      </div>
+
+      <div class="author-name"><b>我叫123</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;我叫123&#39;, &#39;09651b5a79aa1b18a869274f4ed32899&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-01-02 14:32:23</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>为什么我的还是连接不了？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="be9aed999fa5ca3cc874729b88d65608" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/79350f1d125a759e1be3587e7d32254f">
+
+      </div>
+
+      <div class="author-name"><b>leo</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;leo&#39;, &#39;be9aed999fa5ca3cc874729b88d65608&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-01 17:20:02</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好，我在执行nano /serverspeeder/etc/config  这步的时候，打开的文件是空的，什么都没有。没有办法  “将 advinacc 的 0 改为 1”  。请问是什么原因呢？</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="d0b5328d22f4f5550f3a1dc26e830466" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/81aa96088fab2261e8646cc1dca9e7a3">
+
+      </div>
+
+      <div class="author-name"><b>Arthur</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Arthur&#39;, &#39;d0b5328d22f4f5550f3a1dc26e830466&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-09 17:50:48</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@leo 你没有到Vultr 环境下，你要先 SSH 登录一下</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="e50370d0e89145d60d79fff6e2c82e08" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;e50370d0e89145d60d79fff6e2c82e08&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-01 23:02:57</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@leo 估计是安装包的原因吧，可以 cd /serverspeeder/etc/ 进入文件夹然后 ls -a 看下有没有 config 文件，没有的话可以通过 touch config 来创建，然后再编辑</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="a492b930ea96f154f57fdbed1a50cefc" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/79350f1d125a759e1be3587e7d32254f">
+
+      </div>
+
+      <div class="author-name"><b>leo</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;leo&#39;, &#39;a492b930ea96f154f57fdbed1a50cefc&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-02 11:55:43</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Yale 真是奇怪，今天重新部署了一遍锐速，可以了。谢谢！</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="be27b9dae287c0d43efab9225f03b89d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/81aa96088fab2261e8646cc1dca9e7a3">
+
+      </div>
+
+      <div class="author-name"><b>Arthur</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Arthur&#39;, &#39;be27b9dae287c0d43efab9225f03b89d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-09 17:52:19</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@leo 你部署锐速成功了？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="52b24f0c529b47faeeb000f1c7c41a7d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/2144cbcfeb6aa2a33dfc3c023cfff47d">
+
+      </div>
+
+      <div class="author-name"><b>qianwj</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;qianwj&#39;, &#39;52b24f0c529b47faeeb000f1c7c41a7d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-15 18:42:00</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@monmas @Yale 你好，我也遇到了相同的问题，请问是怎么修改成功的？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="3e07403538b3c6b10baa575cb7adea78" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/c0f8289115754befae74336ca352d98c">
+
+      </div>
+
+      <div class="author-name"><b>monmas</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;monmas&#39;, &#39;3e07403538b3c6b10baa575cb7adea78&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-15 18:48:42</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@qianwj 直接输入就好了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="f5e5186d1a07beedbf4db435870c2626" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/9204cdc873c244126eab88011a89e5dc">
+
+      </div>
+
+      <div class="author-name"><b>zhangyuxuan</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;zhangyuxuan&#39;, &#39;f5e5186d1a07beedbf4db435870c2626&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-16 15:35:50</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>博主大大！您好！我是mac系统，在2.3连接VPS这一步时，在终端输入后，显示的是</p>
+
+<p>Last login: Fri Feb 16 15:29:46 on ttys000</p>
+
+<p>zhangyuxuandeMacBook-Air:~ zhangyuxuan$ ssh root@45.32.31.236</p>
+
+<p>ssh: connect to host 45.32.31.236 port 22: Operation timed out</p>
+
+<p>zhangyuxuandeMacBook-Air:~ zhangyuxuan$ </p>
+
+<p>请问这是什么原因呀</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="15a473641978226ae292020cd345af7d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;15a473641978226ae292020cd345af7d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-18 10:34:26</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@zhangyuxuan 连接超时了，估计是网络问题</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="7e9ec77bf1d152adcafe403cda9024d7" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/4d22b03dbf6499c01deff016f8f6d580">
+
+      </div>
+
+      <div class="author-name"><b>CYT</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;CYT&#39;, &#39;7e9ec77bf1d152adcafe403cda9024d7&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-24 16:06:08</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>您好，很感谢您的分享。</p>
+
+<p>我在进行3.2步时，输入Y并回车，显示 Error writing /etc/rc.local: Permission denied</p>
+
+<p>请问这个问题该如何解决？</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="357e044a04d088368729a7b369b2d842" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;357e044a04d088368729a7b369b2d842&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-02-28 21:14:07</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@CYT 在最前面加 sudo，sudo nano /etc/rc.local</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="d0f8a2c52971c6ea07059744b1d5635e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/8e866a4907af723b728425d75c133603">
+
+      </div>
+
+      <div class="author-name"><b>Ann</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Ann&#39;, &#39;d0f8a2c52971c6ea07059744b1d5635e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-05 18:54:33</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>在shadowsocks.json文件里添加多用户的方式“port_password"{"12345":"password1", "12346":"password2",...}貌似不好使...</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="1a5e3cd6ab028476a1128821e097867a" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;1a5e3cd6ab028476a1128821e097867a&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-05 21:49:05</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Ann 防火墙未开放新增的端口，解决办法已更新在文中</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="a9fb8e74c5f4661934dcad65a939144e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/71460bd37c3f37e606f84ef1a6ec3d3d">
+
+      </div>
+
+      <div class="author-name"><b>superme</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;superme&#39;, &#39;a9fb8e74c5f4661934dcad65a939144e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-08 20:55:30</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>哎，从17年底到现在，和谐太快了，，，真的是自己搭建的已经毁进去两台机子了  vultr的ip都被墙的差不多了  我个人的建议，如果不是特别刚需，或者大流量刚需的话，建议找一些免费提供节点的网站，机场比较好，自己搭建的难度高，风险大，大年30被墙一台机子，  两会又被墙了ip都要哭了   顺手推荐个免费的机场  ssr .superssr.  me 这个机场免费用户提供3M带宽，不限制注册，还算可以吧。。。</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="1385faedeb615bb2a4bca81cc2fe3b45" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;1385faedeb615bb2a4bca81cc2fe3b45&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-10 09:15:55</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@superme 哪儿的节点？我从16年到现在3个节点自用从来没被封过</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="6b4abca89d5c82b9860046560199da95" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/8d26c78e95944b46d76da4ed6d6f26db">
+
+      </div>
+
+      <div class="author-name"><b>13046812345</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;13046812345&#39;, &#39;6b4abca89d5c82b9860046560199da95&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-13 16:10:03</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好 在putty那里输入ip和密码之后显示Access Denied要怎么办</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="9af0df1d24be66d024fc77dad2a84cc2" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/72cfa319c61b9277dea509ddd585f13c">
+
+      </div>
+
+      <div class="author-name"><b>425601853</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;425601853&#39;, &#39;9af0df1d24be66d024fc77dad2a84cc2&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-17 12:23:42</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>您好 命令./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log中的"|"符号我打出来怎么是"&gt;"呢？求解决办法 谢谢</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="068a2f056cbea8d6b77e8977f27c54e6" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;068a2f056cbea8d6b77e8977f27c54e6&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-03-17 19:56:19</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@425601853 复制命令贴进去试试</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="318433de8583b78fc0f7c6080bad40f5" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/ff881f1ee5079b835d17da1b42c6b1cf">
+
+      </div>
+
+      <div class="author-name"><b>Coreat</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Coreat&#39;, &#39;318433de8583b78fc0f7c6080bad40f5&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-01 23:38:43</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好，在开放端口的时候每输入一条命令都会出现“-bash: syntax error near unexpected token `输入的端口'”，应该怎么解决呢？</p>
+
+<p>为什么系统认为我是bot啊XD</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="e39bd8b537c9750bdbdfa32430a5a8d2" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/ff881f1ee5079b835d17da1b42c6b1cf">
+
+      </div>
+
+      <div class="author-name"><b>Coreat</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Coreat&#39;, &#39;e39bd8b537c9750bdbdfa32430a5a8d2&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-01 23:47:17</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Coreat 是不是因为我没有在Vultr里设置防火墙个说</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="e8f6e8dd5ce5f28a3e12a3c4f466bac4" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;e8f6e8dd5ce5f28a3e12a3c4f466bac4&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-04 23:01:37</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Coreat 看报错是指令的句法错了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="52670ccf427e8247b4837e2e4f6cb199" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/820abaebe9713ea173f21cb575137189">
+
+      </div>
+
+      <div class="author-name"><b>书虫</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;书虫&#39;, &#39;52670ccf427e8247b4837e2e4f6cb199&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-09 15:15:58</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>能把centOS 7更改防火墙规则写一下吗？ 现在服务器版本变成7了，谢谢了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="56a28c6b93ac2cb7724dd2eabfb27592" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/81aa96088fab2261e8646cc1dca9e7a3">
+
+      </div>
+
+      <div class="author-name"><b>Arthur</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Arthur&#39;, &#39;56a28c6b93ac2cb7724dd2eabfb27592&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-04-28 11:37:53</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>大神如果一个 ip 开多个用户多个端口的话会不会影响速度？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="b2d5cfa64e8fa4975be477f521d3bab1" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/02502c0e3d9d796f908ad7c766f09b75">
+
+      </div>
+
+      <div class="author-name"><b>cook</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;cook&#39;, &#39;b2d5cfa64e8fa4975be477f521d3bab1&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-07 14:48:05</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>博主你好 ，我除了开启锐速 ，其他都安装好了，系统选择的是 Ubuntu 16.04 x64 ，IP地址也可以ping 通 ，就是打不开 google ，是哪里设置的不对吗？</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="8f5ed039e30a55840b0170d939921400" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/02502c0e3d9d796f908ad7c766f09b75">
+
+      </div>
+
+      <div class="author-name"><b>cook</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;cook&#39;, &#39;8f5ed039e30a55840b0170d939921400&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-07 15:10:27</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@cook 重启了系统可以打开了。我如果更换服务器系统为 CentOS ，那还需要再设置一遍吗</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="616c5256531e76bf428d9ab72638e11d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;616c5256531e76bf428d9ab72638e11d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-08 12:13:04</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@cook 更换系统应该是要重装的</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="13329f7c9a681038dc78bce16192fcb3" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/6510b8a9389c1cfb6fe65790d5adc539">
+
+      </div>
+
+      <div class="author-name"><b>呵呵哒</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;呵呵哒&#39;, &#39;13329f7c9a681038dc78bce16192fcb3&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-16 13:20:16</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>把ip，port，password给别人，别人是不是用ss客户端也能直接上外网？多人共用这一个ip</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="8cc86ce7da4fc7f067090550a2334471" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;8cc86ce7da4fc7f067090550a2334471&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-17 21:43:49</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@呵呵哒 可以</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="e4110300eea690d5542c1a4b28dfb349" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/6988e240ccf32f8129fa79f1960210af">
+
+      </div>
+
+      <div class="author-name"><b>Leeloleelol</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Leeloleelol&#39;, &#39;e4110300eea690d5542c1a4b28dfb349&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-26 17:46:41</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>我用的BBR，还是感谢博主~</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="5980ef3a968e8ec0a4f0cde3512e68a8" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/6988e240ccf32f8129fa79f1960210af">
+
+      </div>
+
+      <div class="author-name"><b>Leeloleelol</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Leeloleelol&#39;, &#39;5980ef3a968e8ec0a4f0cde3512e68a8&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-06-26 17:47:44</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>我目前用的vultr东京节点 也是找了好久才找到的没被ban的IP，目前安全使用了大半年</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="caf0ad35b03f59b07b60bd7e368bcdea" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/3c6ceb55810a2d8d94403b93e372c86b">
+
+      </div>
+
+      <div class="author-name"><b>Matty</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Matty&#39;, &#39;caf0ad35b03f59b07b60bd7e368bcdea&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-07-03 11:13:04</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>尊敬的博主你好，谢谢你的无私分享。</p>
+
+<p>我现在通过vultr的成功登录了View console,依次执行三个命令，但是在执行第一个命令的时候出了问题。</p>
+
+<p>显示failed:Network is unreachable，</p>
+
+<p>我想问下这是什么问题？</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="5d4c1478d18c84e955f5fb2374ad3dab" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/3c6ceb55810a2d8d94403b93e372c86b">
+
+      </div>
+
+      <div class="author-name"><b>Matty</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Matty&#39;, &#39;5d4c1478d18c84e955f5fb2374ad3dab&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-07-03 11:21:38</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>另外 我用putty连接也是显示网络错误，很奇怪，明明可以上外网。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="0ed92dadc8069f7f406bf55e2dc5c46a" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/02a53e633b8105850bb8d503aebbb041">
+
+      </div>
+
+      <div class="author-name"><b>terry</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;terry&#39;, &#39;0ed92dadc8069f7f406bf55e2dc5c46a&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-08-09 22:03:23</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>是这样的，我操作3.2 TCP Fast Open步骤的时候，应该该是某个步骤输错了，而且也保存了，就是能不能自己重新输入一遍，去检索哪儿错了，还有就是，这个步骤错了，会不会影响系统稳定性。。谢谢</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="0b580af328f760330db1a6e7b4fed1fe" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/00224b0dd3e68bb4ab187cc3230d9aec">
+
+      </div>
+
+      <div class="author-name"><a href="http://fangder.top/" rel="external nofollow"><b>fangder</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;fangder&#39;, &#39;0b580af328f760330db1a6e7b4fed1fe&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-09-25 15:23:29</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>我记得以前是安装锐速加速的，现在改成BBR了么？还有，我想问个问题，为什么我帮别人安装完的时候，电脑的速度大概500kb左右，但是手机在同样的网络下【同一个wifi】却能达到2M甚至3M</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="e2e54d9b070139c0e2dfa2f7138fb017" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;e2e54d9b070139c0e2dfa2f7138fb017&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-09-25 19:37:03</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@fangder 锐速安装条件太严苛，BBR效果差不多。https://github.com/shadowsocks/shadowsocks-windows/issues/1875 参考下吧</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="a7b713103c761b4f3dff677d1bee2f77" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/00224b0dd3e68bb4ab187cc3230d9aec">
+
+      </div>
+
+      <div class="author-name"><a href="http://fangder.top/" rel="external nofollow"><b>fangder</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;fangder&#39;, &#39;a7b713103c761b4f3dff677d1bee2f77&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-09-25 19:50:06</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Yale 感谢回复，也确实，BBR安装确实很简单。也试了下BBR，感觉提升还是蛮明显的。这个其实我也参考过，但是还是不行，win10系统。虽然我自己的能达到1.2-1.3M左右，但始终是没有手机的高。哎，无解</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="d8db67259030dd36d791367109a86de4" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/7247ab50da2489be78e8f2447915dbd5">
+
+      </div>
+
+      <div class="author-name"><b>Aragronsam</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Aragronsam&#39;, &#39;d8db67259030dd36d791367109a86de4&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-09-26 11:23:49</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>很棒的教程，感谢博主，还有，问哈，博主的博客主题是？很棒</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="86fb9c1a767c3cbff71ed990a5eb524d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;86fb9c1a767c3cbff71ed990a5eb524d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-09-26 21:36:42</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Aragronsam 自己写的 https://github.com/zoomyale/bitcron-theme</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="8b736d8ad82a896232f1a57f3b277b65" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/3fdd163cc3435497e8893d8e8df99725">
+
+      </div>
+
+      <div class="author-name"><b>Melody</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Melody&#39;, &#39;8b736d8ad82a896232f1a57f3b277b65&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-11-23 11:55:21</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>感谢分享！请问在2.3步 登陆VPS 的时候 输入密码后 总是显示“Permission denied, please try again.”是怎么回事？密码就是从Vultr上复制的，应该不会错呀。</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="48cbfc6bcb109e18186969a1c6127067" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;48cbfc6bcb109e18186969a1c6127067&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-11-23 19:43:24</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Melody 可以试下 Vultr 网页上的控制台登录能不能登，不行的话销毁新建吧</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="6a7508a6fc80d0c0c4b3cc5548c1db91" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/3fdd163cc3435497e8893d8e8df99725">
+
+      </div>
+
+      <div class="author-name"><b>Melody</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Melody&#39;, &#39;6a7508a6fc80d0c0c4b3cc5548c1db91&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-11-23 20:00:13</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>网页上可以登录的，其实我的Vultr已经用了一阵子，都是正常的。我是看到文章，想安装BBR加速来着，但是终端上就登陆不进去了</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="f38d6def691db8f722f5b8d34329323e" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/b642b4217b34b1e8d3bd915fc65c4452">
+
+      </div>
+
+      <div class="author-name"><b>Test</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Test&#39;, &#39;f38d6def691db8f722f5b8d34329323e&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-11-28 16:01:00</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>捐赠页面有错别字哦“支付宝“写成了”支付包“</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="78717425fd2027484d520da75ac3dd31" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;78717425fd2027484d520da75ac3dd31&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-11-28 23:25:07</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Test 谢谢指正</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="a2fef76e95c6bedc1e3d3a61f1053168" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/acab9f0f2606155ca815a9d2e9ce6745">
+
+      </div>
+
+      <div class="author-name"><a href="https://topvpn.github.io/" rel="external nofollow"><b>git</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;git&#39;, &#39;a2fef76e95c6bedc1e3d3a61f1053168&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2018-12-23 15:01:27</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>先收藏了，现在直接走的付费v p/n</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="e905d4daeffc4551e1a43341b086b135" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/400fc2702a1864831524a4bb8c9acd37">
+
+      </div>
+
+      <div class="author-name"><b>Northwind</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Northwind&#39;, &#39;e905d4daeffc4551e1a43341b086b135&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-02-06 18:10:12</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>你好，17年按照你的步骤布置好vps后一直可以使用，今天突然发现无法连接网络，能ping通vps的IP，ssh登陆vps后发现内核变成了老版本，之前装好的bbr也没了，但是shadowsocks进程还在运行，然后我重新装了bbr，不行，于是重新按照你的步骤来了一遍，目前仍然无法连接网络。请问这种情况是出了什么问题呢？</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="c0235f8447d079686d026e7456249506" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="http://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;c0235f8447d079686d026e7456249506&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-02-12 20:33:12</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Northwind 可能是 IP 的问题，直接停掉重新部署一个服务器试试呢</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="ec0a68d30ec9791ec654febab12eb6bc" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/800f7cc103d8c65b98f80d591e4eec19">
+
+      </div>
+
+      <div class="author-name"><b>naihn</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;naihn&#39;, &#39;ec0a68d30ec9791ec654febab12eb6bc&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-04 16:08:44</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>大哥你好，我是纯小白，凭借你这篇文章走进了科学上网的世界。一直以来都用得很舒畅，先表达一下诚挚的感谢。</p>
+
+<p>然而这几天开始用不了了，我无法判断究竟是什么原因，登录Vultr的网站显示服务器状态应该是正常的。结合到最近在开会，想请问这种失效的情况是普遍的吗？有什么解决方案吗？（如果与开会有关的话）开完会会好吗？</p>
+
+<p>感谢指教。</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="8b61c2c80cfe6c5c9370d58751bd46d4" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="https://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;8b61c2c80cfe6c5c9370d58751bd46d4&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-04 22:18:22</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@naihn 可能是 ip 地址被封了，敏感时期会封这种大服务商部分 ip 段。直接删除现有的服务器，重新创建重新部署一个吧。</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="8020acbf449eb6951c804e1329f017ee" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/e77669673f031c91d653abf8d5c49457">
+
+      </div>
+
+      <div class="author-name"><b>rentw47</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;rentw47&#39;, &#39;8020acbf449eb6951c804e1329f017ee&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-06 20:33:16</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Yale 同样也表达一下诚挚的感谢，文章很有用。</p></div>
+
+<div class="p_part"><p>不过发现了一些问题，想请教一下。VPS和SS部署好之后，前几天都好好的，但是过了几天突然就用不了了，而且这个问题出现过几次了，之前因为还尝试不同地区的VPS的速度，所以也没管。今天又出了这个问题所以决定稍微研究一下，结果发现ip地址没事，但是端口被封了，按文章中的方法添加了别的端口后，有可以用了。但是觉得有点奇怪，为什么是端口被封了呢？</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="6ee301aecd2749447ccac0e60b854a2d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="https://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;6ee301aecd2749447ccac0e60b854a2d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-06 22:23:24</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@rentw47 今天我的服务器也都被 ban 了。SS 的安全性还是有争议，端口和 IP 是可以被嗅探到的，不过一般不太会对个人 VPS 动刀，估计敏感时期的原因。暂时可以多配几个相同密码的不同端口自用，推荐了解一下 V2Ray，有余力的话迁移过去。</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="ceb7a09a9d2d9d0f7a8064ae3b5be1ed" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/e77669673f031c91d653abf8d5c49457">
+
+      </div>
+
+      <div class="author-name"><b>rentw47</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;rentw47&#39;, &#39;ceb7a09a9d2d9d0f7a8064ae3b5be1ed&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-06 23:54:56</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@Yale 非常感谢，V2Ray看起来很不错，我去了解一下</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="9e29f0900c744c865ac86cbcad45bb33" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/4f73fd87d1ec443ae56e48342a3d416d">
+
+      </div>
+
+      <div class="author-name"><a href="https://zoomyale.com/" rel="external nofollow"><b>lavyy</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;lavyy&#39;, &#39;9e29f0900c744c865ac86cbcad45bb33&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-16 06:10:44</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>博主你好，我是Mac系统的，在步骤3.2的最后一个重启shadowsocks的指令出了问题，其它都和你的教程是一样的，也试着连了外网但是连不上，请你给看下是什么问题？谢谢了</p>
+
+<p>错误信息摘要：</p>
+
+<p>INFO: loading config from /etc/shadowsocks.json stopped</p>
+
+<p>Stopping Shadowsocks success</p>
+
+<p>INFO: loading config from /etc/shadowsocks.json</p>
+
+<p>TypeError: update() argument 1 must be string or read-only buffer, not dict</p>
+
+<p>Starting Shadowsocks failed</p></div></div>
+
+    <ul class="sub_comments">
+
+
+
+<li id="5cf39b153af2159935c8accbc20b1f6d" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/d8d5e0591ccad91a4a16061a8bfb031_80_80_true_86.png">
+
+      </div>
+
+      <div class="author-name"><a href="https://zoomyale.com/" rel="external nofollow"><b>Yale</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Yale&#39;, &#39;5cf39b153af2159935c8accbc20b1f6d&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-16 11:01:22</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>@lavyy nano /etc/shadowsocks.json 这步配置文件有错误，检查一下引号和大括号吧</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="5d758d2a456f2898a3a258144260603c" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/4f73fd87d1ec443ae56e48342a3d416d">
+
+      </div>
+
+      <div class="author-name"><a href="https://zoomyale.com/" rel="external nofollow"><b>lavyy</b>
+</a>
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;lavyy&#39;, &#39;5d758d2a456f2898a3a258144260603c&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-17 06:04:03</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>非常感谢博主，第一次留言得到这么快的回复，而且还把教程更新了一遍，博主辛苦了！ss已经搭建成功，网速这回才算是起飞了，不愧是科学上网的终极姿势，要是能早点看到这篇文章，不知能少走多少弯路啊，再次感谢博主的分享！</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="b80a7d8c1391bb352cad5de88ac0bcf3" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/bb0ee14bcc2090f6c775d92ceab73a72">
+
+      </div>
+
+      <div class="author-name"><b>Wangpeng3217</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;Wangpeng3217&#39;, &#39;b80a7d8c1391bb352cad5de88ac0bcf3&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-03-30 00:35:55</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>博主你好，希望您能更新Shadowsocks-libev多用户设置教程，Thanks.</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="72c4b7d5af629207e4f0ce28b3481d6f" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/5e1a2c3d4ce2f070fe86c3ffc234ca80">
+
+      </div>
+
+      <div class="author-name"><b>sizeof</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;sizeof&#39;, &#39;72c4b7d5af629207e4f0ce28b3481d6f&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-04-17 11:51:34</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>ss搭建是成功的，但是在ios上用Potatso连接上之后，访问google还是不行</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+
+
+
+<li id="df6a6b9513628d7e8ec27d4ce0f463ab" class="comment">
+  <div class="comment_wrapper">
+    <div class="author">
+      <div class="avatar"><img src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/78ad3edd1a3bd8ce20bb7a3062d9b45b">
+
+      </div>
+
+      <div class="author-name"><b>ZALE</b>
+
+
+<a href="javascript:void(0)" onclick="reply_comment(&#39;ZALE&#39;, &#39;df6a6b9513628d7e8ec27d4ce0f463ab&#39;)" class="reply">reply</a>
+
+      </div>
+
+      <div class="author-date"><small>2019-04-17 23:03:59</small>
+
+      </div>
+
+    </div>
+
+    <div class="comment_content"><div class="p_part"><p>怎么文章更新了？跪求原来的设置方法。</p></div></div>
+
+  </div>
+
+</li>
+
+
+
+    </ul>
+<script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/jquery.js(1).下载"></script>
+<script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/js.cookie.js.下载"></script>
+<script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/jquery.textcomplete.min.js.下载"></script>
+<script type="text/javascript" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/script.js.下载"></script>
+
+    <script>var people=[
+    "Kris", 
+    "terry", 
+    "Lanchr", 
+    "superme", 
+    "13046812345", 
+    "425601853", 
+    "Coreat", 
+    "sizeof", 
+    "fangder", 
+    "Northwind", 
+    "ZALE", 
+    "git", 
+    "monmas", 
+    "kirk", 
+    "Test", 
+    "\u6211\u53eb123", 
+    "1476377353", 
+    "Wangpeng3217", 
+    "leo", 
+    "Arthur", 
+    "Aragronsam", 
+    "qianwj", 
+    "Yale", 
+    "cook", 
+    "\u4e66\u866b", 
+    "hotsuitor", 
+    "naihn", 
+    "Formblackt", 
+    "jayjay", 
+    "Ann", 
+    "CYT", 
+    "Allan", 
+    "Matty", 
+    "\u5475\u5475\u54d2", 
+    "Leeloleelol", 
+    "hitsuitor", 
+    "Melody", 
+    "lavyy", 
+    "zhangyuxuan"
+]</script>
+
+    <script>$(".new_comment textarea").textcomplete([{
+    match: /@(\S*)$/,
+    search: function(term, callback){
+        callback($.map(people, function(person){
+            return person.indexOf(term)==0 ? person : null
+        }))
+    },
+    replace: function(value){
+        if (value.indexOf(' ')!='-1'){
+            return '@' + value + ', ';
+        }
+        else{
+            return '@' + value + ' ';
+        }
+    },
+    index: 1
+}]);
+</script>
+  </div>
+
+</div>
+
+
+
+  </div>
+</div>
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+    <div class="footer">
+<link href="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/footer.css" type="text/css" rel="stylesheet"><div class="site_footer_wrap"><div class="site_footer">
+
+      <div class="mysocials"><div class="my_socials">
+<a href="https://telegram.me/zoomyale" title="telegram"><i class="fa fa-send-o"></i></a>
+<a href="https://twitter.com/zoomyale" title="twitter"><i class="fa fa-twitter"></i></a>
+<a href="http://www.weibo.com/zoomyale" title="weibo"><i class="fa fa-weibo"></i></a>
+<a href="https://github.com/zoomyale" title="github"><i class="fa fa-github"></i></a>
+
+</div><link href="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+      </div>
+
+      <div class="copyright"><span>© 2016 - 2019 也而的博客</span>
+
+        <div><a href="https://us.bitcron.com/" target="_blank">Powered by Bitcron</a>
+<span>|</span>
+<a href="https://github.com/zoomyale/bitcron-theme" target="_blank">Designed by Yale</a>
+
+        </div>
+
+      </div>
+
+</div></div>
+
+    </div>
+
+
+<style type="text/css">a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    transition-duration: .5s;
+    transition-propety: background-color;
+    display: none;
+}
+
+a.back_to_top span {
+    color: #888;
+}
+
+a.back_to_top:hover {
+    cursor: pointer;
+    background: #dfdfdf;
+}
+
+a.back_to_top:hover span {
+    color: #555;
+}
+
+@media print, screen and (max-width: 580px) {
+    .back_to_top {
+        display: none !important;
+    }
+}
+
+
+
+</style><a id="back_to_top" href="https://zoomyale.com/2016/vultr_and_ss/#" class="back_to_top" style="display: block;"><span>△</span>
+</a>
+
+
+<script>$(document).ready((function(_this) {
+  return function() {
+    var bt;
+    bt = $('#back_to_top');
+    if ($(document).width() > 480) {
+      $(window).scroll(function() {
+        var st;
+        st = $(window).scrollTop();
+        if (st > 30) {
+          return bt.css('display', 'block');
+        } else {
+          return bt.css('display', 'none');
+        }
+      });
+      return bt.click(function() {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+      });
+    }
+  };
+})(this));
+</script>
+
+  
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async="" src="./科学上网的终极姿势：在 Vultr VPS 上搭建 Shadowsocks_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-74749167-1');
+</script>
+
+
+</body></html>
