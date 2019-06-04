@@ -4,10 +4,12 @@ import itchat
 import os
 HELP_MSG = u'''
 availeble cmds:
-    clac
+    help
+    calc
     shutdown -xx(s)
     cancel
     notepad
+    logout
 '''
 @itchat.msg_register(itchat.content.TEXT)
 def music_player(msg):
@@ -23,10 +25,14 @@ def music_player(msg):
         os.system("shutdown /a")
     elif msg['Text'] == 'notepad':
         os.system("notepad")
+    elif msg['Text'] == 'help':
+        itchat.send(HELP_MSG, 'filehelper')
+    elif msg['Text'] == 'logout':
+        itchat.logout()
     else:
         itchat.send(msg['Text'], 'filehelper')
 
 
-itchat.auto_login(True,enableCmdQR=True)
+itchat.auto_login(True, enableCmdQR=True)
 itchat.send(HELP_MSG, 'filehelper') 
 itchat.run()
