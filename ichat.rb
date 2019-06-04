@@ -33,6 +33,6 @@ def music_player(msg):
         itchat.send(msg['Text'], 'filehelper')
 
 
-itchat.auto_login(True, enableCmdQR=True)
+itchat.auto_login(True, enableCmdQR=2)
 itchat.send(HELP_MSG, 'filehelper') 
 itchat.run()
