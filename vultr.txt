@@ -23,7 +23,7 @@ uname -r
 lsmod | grep bbr
 如果输出的内核版本为 4.9 以上版本，且返回值有 tcp_bbr 模块的话，说明 bbr 已启动
 
-#H9uw_K_EH*Qo_Ee
+oD=4AM8r5k.-xMm9
 45.77.127.250
 
 
@@ -56,3 +56,24 @@ $ ssh-add ~/.ssh/id_rsa
 
 Step 4: Add your SSH key to the server
 $ cat ~/.ssh/id_rsa.pub | ssh username@server.address.com 'cat >> ~/.ssh/authorized_keys'
+
+
+Starting Shadowsocks-libev success
+
+Congratulations, Shadowsocks-libev server install completed!
+Your Server IP        :  45.77.127.250
+Your Server Port      :  13478
+Your Password         :  *leo037@$
+Your obfs             :  tls
+Your Encryption Method:  aes-256-gcm
+
+Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)
+ ss://YWVzLTI1Ni1nY206KmxlbzAzN0AkQDQ1Ljc3LjEyNy4yNTA6MTM0Nzg=
+Your QR Code has been saved as a PNG file path:
+ /root/shadowsocks_libev_qr.png
+
+Welcome to visit: https://teddysun.com/486.html
+Enjoy it!
+
+
+ 149.28.92.39  207.246.103.124  66.42.96.9  207.246.106.40  can't ping
