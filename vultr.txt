@@ -1,0 +1,79 @@
+首先输入以下 3 行命令，每次输入一行、回车，等待屏幕上的操作完成后再输入下一条。
+wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+
+chmod +x shadowsocks-all.sh
+
+./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
+
+安装完成以后，Shadowsocks 的服务器端就已经配置完了，你可以输入以下命令检查是否已经开始运行。
+/etc/init.d/shadowsocks-libev status
+
+nano /etc/shadowsocks-libev/config.json
+按 Ctrl + X ，再输入 Y 并回车确认退出
+
+/etc/init.d/shadowsocks-libev restart
+
+
+安装 BBR
+和 2.3 中的步骤一样，首先需要使用 SSH 登录 VPS。
+ssh root@<host>
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+重新使用 SSH 登录 VPS，这时 BBR 应该已经开启了。你可以使用以下两行命令验证一下。
+uname -r
+lsmod | grep bbr
+如果输出的内核版本为 4.9 以上版本，且返回值有 tcp_bbr 模块的话，说明 bbr 已启动
+
+oD=4AM8r5k.-xMm9
+45.77.127.250
+
+
+Step 1: Check for SSH Keys
+
+$ ls -al ~/.ssh
+# Lists all the files in your .ssh directory, if they exist
+Generating public/private rsa key pair
+
+Step 2: Generate a new SSH key
+$ ssh-keygen -t rsa -b 4096 -C "mcflym@N123456"
+$ ssh-keygen -t rsa -C "mcflym@N123456"
+# Creates a new ssh key, using the provided domain username and computer name as a label
+Generating public/private rsa key pair.
+
+Step 3: Add your key to the ssh-agent
+To configure the ssh-agent program to use your SSH key, first ensure ssh-agent is enabled
+
+# start the ssh-agent in the background
+$ eval $(ssh-agent -s)
+Agent pid 59566
+
+If you are using Git Bash, turn on the ssh-agent with command shown below instead:   ssh-copy-id
+# start the ssh-agent in the background
+$ eval `ssh-agent`
+Agent pid 59566
+
+Then, add your SSH key to the ssh-agent:
+$ ssh-add ~/.ssh/id_rsa
+
+Step 4: Add your SSH key to the server
+$ cat ~/.ssh/id_rsa.pub | ssh username@server.address.com 'cat >> ~/.ssh/authorized_keys'
+
+
+Starting Shadowsocks-libev success
+
+Congratulations, Shadowsocks-libev server install completed!
+Your Server IP        :  45.77.127.250
+Your Server Port      :  13478
+Your Password         :  *leo037@$
+Your obfs             :  tls
+Your Encryption Method:  aes-256-gcm
+
+Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)
+ ss://YWVzLTI1Ni1nY206KmxlbzAzN0AkQDQ1Ljc3LjEyNy4yNTA6MTM0Nzg=
+Your QR Code has been saved as a PNG file path:
+ /root/shadowsocks_libev_qr.png
+
+Welcome to visit: https://teddysun.com/486.html
+Enjoy it!
+
+
+ 149.28.92.39  207.246.103.124  66.42.96.9  207.246.106.40  can't ping
