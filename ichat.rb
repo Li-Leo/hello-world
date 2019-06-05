@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import itchat
 import os
-HELP_MSG = u'''
+HELP_MSG = r'''
 availeble cmds:
     clac
     shutdown -xx(s)
-    cancle
+    cancel
     notepad
 '''
 @itchat.msg_register(itchat.content.TEXT)
@@ -19,7 +19,7 @@ def music_player(msg):
     elif 'shutdown' in msg['Text']:
         cmd = "shutdown /s /t " + (msg['Text'])[9:]
         os.system(cmd)
-    elif msg['Text'] == 'cancle':
+    elif msg['Text'] == 'cancel':
         os.system("shutdown /a")
     elif msg['Text'] == 'notepad':
         os.system("notepad")
