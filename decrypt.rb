@@ -61,8 +61,8 @@ def move_and_rename():
         f.rename(f.with_suffix(''))
 
 if __name__ == "__main__":
-    print(Path(sys.argv[0]).suffix)
-    # num = save_as_rb()
-    # move_and_rename()
-    # print(f'\n{num} files decryped!')
-    # set_focus('cmd.exe')
+    print(sys.argv[0])
+    num = save_as_rb()
+    move_and_rename()
+    print(f'\n{num} files are decrypted!')
+    set_focus('cmd.exe')
