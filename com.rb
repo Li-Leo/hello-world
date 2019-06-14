@@ -5,6 +5,7 @@ import sys
 import serial
 from datetime import datetime
 import keyboard
+import re
 
 port_name = sys.argv[1]
 
@@ -42,14 +43,15 @@ def interact():
                 
             if serial_in:
                 serial_in = serial_in[len(cmd):]
-                if 'log' in cmd or cmd == 'data':
-                    with open(datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-                                + cmd +'.txt', 'w') as f:
-                        f.write(serial_in)
                 print(serial_in)
 
+                if 'log' in cmd or cmd == 'data':
+                    with open(cmd +'.txt', 'w') as f:
+                        f.write(serial_in)
+                        f.write('\ncreated time: ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
 def send_repeat_cmd(cmd):
-    with open(datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+    with open(datetime.now().strftime('%Y-%m-%d %H-%M-%S ')
                 + cmd + '.txt', 'w') as f:
         while True:
             com.write((cmd + '\n').encode('utf-8'))
@@ -68,18 +70,45 @@ def send_repeat_cmd(cmd):
                 com.close()
                 break
 
+def get_factory_data():
+    with open('data.txt') as f:
+        for line in f:
+            if 'S/N' in line:
+                SN = line[5:].strip()
+            elif 'EncoderCountEachML' in line:
+                encoder_count_each_ml = re.findall('\d+', line)[0]
+            elif 'Bubble alarm' in line:
+                bubble_alarm_status = re.findall('\d+', line)[0]
+            elif 'pressure threshold' in line:
+                pressure_threshold = re.findall('\d+', line)[0]
+            elif 'precision factor' in line:
+                precision_factor = re.findall('\d+', line)[0]
+
+        # print(SN,encoder_count_each_ml,bubble_alarm_status,pressure_threshold,precision_factor)
+        return (SN, encoder_count_each_ml, bubble_alarm_status,
+                pressure_threshold, precision_factor)
+
+def log_data():
+    with open('log.txt') as f, open('log1.txt','w') as f1:
+        for line in f:
+            if '发生报警' in line:
+                f1.write(line)
+
 if __name__ == "__main__":
-    print("Please select mode: 1 -- interactive mode, 2 -- repeat mode.")   
-    mode = input("Please input mode: ")
-    if mode == '2':
-        cmd = input("Please input cmd: ")
-        print("Press 'Esc' to exit repeat mode")
-        time.sleep(1)
-        send_repeat_cmd(cmd)
-    elif mode == '1':
-        interact()
-    else:
-        exit()
+    # print("Please select mode: 1 -- interactive mode, 2 -- repeat mode.")   
+    # mode = input("Please input mode: ")
+    # if mode == '2':
+    #     cmd = input("Please input cmd: ")
+    #     print("Press 'Esc' to exit repeat mode")
+    #     time.sleep(1)
+    #     send_repeat_cmd(cmd)
+    # elif mode == '1':
+    #     interact()
+    # else:
+    #     exit()
+    # get_factory_data()
+    log_data()
+
 
 
 '''  pyserial module man
