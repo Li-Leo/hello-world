@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import itchat
 import os
-HELP_MSG = u'''
+HELP_MSG = r'''
 availeble cmds:
     help
     calc
