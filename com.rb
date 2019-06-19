@@ -3,28 +3,45 @@
 import time
 import sys
 import serial
-from datetime import datetime
+import serial.tools.list_ports
 import keyboard
 import re
+from   subprocess import run
+from   datetime   import datetime
 
-port_name = sys.argv[1]
+def open_available_port():
+    print("all available ports:")
+    all_ports = serial.tools.list_ports.comports()
+    ports =sorted([str(port).lower() for port in all_ports])
+    for port in ports: print(port)
+    port_name = input("\nplease select the correct port: ")
+    is_exist = False
+    for port in ports:
+        if port_name.lower() in port and port_name.lower().startswith('com'):
+            is_exist = True
+    
+    if not is_exist:
+        print("port doesn't exists!")
+        exit()
 
-#open com
-com = serial.Serial(
-    port=port_name,
-    baudrate=115200,
-)
+    try:
+        com = serial.Serial(port=port_name, baudrate=115200)
+        com.write('givemecmd\n'.encode('utf-8'))
+        time.sleep(0.2)
+        com.reset_input_buffer()
+    except Exception as e:
+        print('failed to open the port!')
+        print(e)
+        exit()
+    return com
 
-com.write('givemecmd\n'.encode('utf-8'))
-time.sleep(0.2)
-com.reset_input_buffer()
-
-def interact():
-    print("Enter your commands below or 'exit' to leave the application.")   
+def interact(com):
+    print("enter your commands below or 'exit' to leave the application.")   
     while True:
-        cmd = input("Please input command: ")
+        cmd = input("please input command: ")
 
         if cmd == 'exit':
+            print("bye!")
             com.close()
             exit()
         elif not cmd:
@@ -32,25 +49,30 @@ def interact():
         else:
             com.write((cmd + '\n').encode('utf-8'))
             serial_in = ''
-            # let's wait some second before reading serial_input
+            # let's wait some seconds before reading serial_input
             if 'log' in cmd:
-                time.sleep(10)
+                time.sleep(1)
+                print('reading log...')
             else:
-                time.sleep(0.5)
+                time.sleep(0.1)
 
-            while com.in_waiting > 0:
-                serial_in += (com.readline().decode('utf-8'))
+            while com.in_waiting:
+                serial_in += (com.readline()).decode('utf-8','ignore')#
+                time.sleep(0.01)
                 
             if serial_in:
-                serial_in = serial_in[len(cmd):]
                 print(serial_in)
 
-                if 'log' in cmd or cmd == 'data':
-                    with open(cmd +'.txt', 'w') as f:
+                if 'log' in cmd or cmd == 'data' or cmd == 'read_data':
+                    file_name = cmd.replace(' ','_')
+                    start_cmd = 'start ' + file_name + '.txt'
+                    with open(file_name +'.txt', 'w') as f:
                         f.write(serial_in)
-                        f.write('\ncreated time: ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                        f.write('\ncreated time: ' + 
+                                datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                    run(start_cmd, shell=True)
 
-def send_repeat_cmd(cmd):
+def send_repeat_cmd(cmd, com):
     with open(datetime.now().strftime('%Y-%m-%d %H-%M-%S ')
                 + cmd + '.txt', 'w') as f:
         while True:
@@ -62,11 +84,11 @@ def send_repeat_cmd(cmd):
                 serial_in += (com.read().decode('utf-8'))
                     
             if serial_in:
-                serial_in = serial_in[len(cmd):]
                 f.write(serial_in)
                 print(serial_in)
 
             if keyboard.is_pressed('esc'):
+                print("bye!")
                 com.close()
                 break
 
@@ -95,19 +117,21 @@ def log_data():
                 f1.write(line)
 
 if __name__ == "__main__":
-    # print("Please select mode: 1 -- interactive mode, 2 -- repeat mode.")   
-    # mode = input("Please input mode: ")
-    # if mode == '2':
-    #     cmd = input("Please input cmd: ")
-    #     print("Press 'Esc' to exit repeat mode")
-    #     time.sleep(1)
-    #     send_repeat_cmd(cmd)
-    # elif mode == '1':
-    #     interact()
-    # else:
-    #     exit()
+    com = open_available_port()
+    print("please select mode: 1--interactive mode, 2--repeat mode.")   
+    mode = input("please input mode: ")
+    if mode == '2':
+        cmd = input("please input cmd: ")
+        print("press 'esc' to exit repeat mode")
+        time.sleep(1)
+        send_repeat_cmd(cmd, com)
+    elif mode == '1':
+        interact(com)
+    else:
+        print("bye!")
+        exit()
     # get_factory_data()
-    log_data()
+    # log_data()
 
 
 
