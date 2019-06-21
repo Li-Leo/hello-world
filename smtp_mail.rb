@@ -6,8 +6,7 @@ from email.mime.text import MIMEText
 
 def mail():
     body = '''
-    不好意思，冯工，今天又不能打开加密的文件了，能帮忙再修改下策略吗？
-    这个策略是不是又自动修改回去了？
+    今日天气不错，天天天蓝！
     谢谢！
 
     Best wishes,
@@ -18,12 +17,12 @@ def mail():
     sender = 'ljl_leo@163.com'
     password = 'aloe707thee037'
 
-    recipient = ['jlli@microport.com','ljl_leo@163.com'] #
+    recipient = ['oleoleo037@163.com'] #'jlli@microport.com',
 
     smtp_server = 'smtp.163.com'
     msg['From'] = sender
     msg['To'] = ';'.join(recipient) + ';'
-    msg['Subject'] = '加密文件打开'
+    msg['Subject'] = '今日天气'
     
     try:
         server = smtplib.SMTP(smtp_server, 25)
