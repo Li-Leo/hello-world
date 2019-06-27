@@ -1,0 +1,30 @@
+data
+--FCT--
+BatteryRedress: -15
+
+--Factory--
+S/N: CFA181201002
+HW: V000
+BatteryThreshold: 0<-0<-0<-0mV
+OcclusionThreshold: AD = 2500  V = 2014 mv
+OcclusionSlope: 174/1000,  one drop increase adc:82
+EncoderCountEachML: 928
+Password: 120
+Bubble alarm: 1
+
+--User--
+VoiceVolume: 50
+Brightness: 32
+PeekModeSwitch: 1
+RunLifetimeCount: 280
+InfusionModeSelection: 0
+MaxCleanTubeDose: 25
+last Infusion Info:
+state:0
+meds-a total dose:0uL, speed:0uL/hr, infused dose:0uL
+meds-b total dose:0uL, infused dose:0uL
+last Infusion Param:
+meds-a total dose:10mL, meds-b total dose:0mL, speed:2000*0.1mL/hr, duration:3*0.1hr
+peek_speed:111*0.1mL/hr, time:1hr~2hr
+
+created time: 2019-06-27 12:05:00

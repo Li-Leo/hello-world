@@ -25,7 +25,7 @@ def open_available_port():
         exit()
 
     try:
-        com = serial.Serial(port=port_name, baudrate=115200)
+        com = serial.Serial(port=port_name, baudrate=115200,timeout=1)
         com.write('givemecmd\n'.encode('utf-8'))
         time.sleep(0.2)
         com.reset_input_buffer()
@@ -57,11 +57,13 @@ def interact(com):
                 time.sleep(0.1)
 
             while com.in_waiting:
-                serial_in += (com.readline()).decode('utf-8','ignore')#
+                serial_in += (com.read(1000)).decode('utf-8','ignore')#
                 time.sleep(0.01)
+                # print(f'{com.in_waiting}')
                 
             if serial_in:
                 print(serial_in)
+                # print(len(serial_in))
 
                 if 'log' in cmd or cmd == 'data' or cmd == 'read_data':
                     file_name = cmd.replace(' ','_')
