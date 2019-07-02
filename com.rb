@@ -8,6 +8,7 @@ import keyboard
 import re
 from   subprocess import run
 from   datetime   import datetime
+from   pathlib import Path
 
 def open_available_port():
     print("all available ports:")
@@ -25,7 +26,7 @@ def open_available_port():
         exit()
 
     try:
-        com = serial.Serial(port=port_name, baudrate=115200,timeout=1)
+        com = serial.Serial(port=port_name, baudrate=115200,timeout=0.1)
         com.write('givemecmd\n'.encode('utf-8'))
         time.sleep(0.2)
         com.reset_input_buffer()
@@ -57,12 +58,14 @@ def interact(com):
                 time.sleep(0.1)
 
             while com.in_waiting:
-                serial_in += (com.read(1000)).decode('utf-8','ignore')#
+                read_in = (com.read(100)).decode('utf-8','ignore')#
+                serial_in += read_in
+                print(read_in, end='')
                 time.sleep(0.01)
                 # print(f'{com.in_waiting}')
                 
             if serial_in:
-                print(serial_in)
+                # print(serial_in)
                 # print(len(serial_in))
 
                 if 'log' in cmd or cmd == 'data' or cmd == 'read_data':
@@ -72,6 +75,23 @@ def interact(com):
                         f.write(serial_in)
                         f.write('\ncreated time: ' + 
                                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+                    if cmd == 'data' or 'log' in cmd:
+                        name = ''
+                        with open(file_name +'.txt') as f:
+                            for line in f:
+                                if "S/N" in line:
+                                    name = line[4:].strip()
+                                    break
+                        if name:
+                            name_path = Path(file_name +'.txt')
+                            if not Path(file_name + '_' + name + '.txt').exists(): 
+                                name_path.rename(file_name + '_' + name + '.txt')
+                                file_name = file_name + '_' + name + '.txt'
+                                start_cmd = 'start ' + file_name
+                            else:
+                                print(f"\n{file_name}_{name}.txt already exists")
+
                     run(start_cmd, shell=True)
 
 def send_repeat_cmd(cmd, com):
